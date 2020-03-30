@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+    loadbalancer:
+      ribbon:
+        enabled: false
+  profiles:
+    active:
+    - dev
+    # enable if configuration need to be loaded from ConfigMap or Secrets
+    # kubernetes:
+    #   reload:
+    #     enabled: true
+    #     mode: polling
+    #     period: 5000
+server:
+  port: 9090
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.loadbalancer: TRACE
+
+app-security:
+  service: appMovilPersonasLocal
+  spEntityId: appMovilPersonasLocal
+  base_path: /gateway
+  enable: true 
+  authEnable: true 
+  cors:
+    allowCredentials: false
